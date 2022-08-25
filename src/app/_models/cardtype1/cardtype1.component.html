@@ -13,7 +13,6 @@
         <div class="d-flex">
             <div class="flex-grow-1">
                 <h5 style="height: 30px">{{info?.name}}</h5>
-                <div class="text-xs">3 Month</div>
                 <div class="chart d-flex" *ngIf="this.commonService.pricePoints">
                     <app-kline-chart-iteam-thumbnail class="chart1" [goodPrice] ="this.info?.price" [isPositive]="this.commonService.floatPercent < 0" [isNegative]="this.commonService.floatPercent > 0" [pricePoints]="this.commonService.pricePoints"></app-kline-chart-iteam-thumbnail>
                  </div>
