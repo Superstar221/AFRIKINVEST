@@ -15,7 +15,7 @@
     <div class="card-footer">
         <div class="d-flex">
             <div class="flex-grow-1">
-                <h2>${{info?.price | number:'2.'}}</h2>
+                <h2>€{{info?.price | number:'2.'}}</h2>
 
             </div>
             <div class="chart d-flex" *ngIf="this.commonService.pricePoints">

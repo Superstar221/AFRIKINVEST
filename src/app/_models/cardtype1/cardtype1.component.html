@@ -18,7 +18,7 @@
                  </div>
             </div>
             <div class="flex-shrink-0 text-end">
-                <h2 style="height: 30px">${{info?.price | number:'2.'}}</h2>
+                <h2 style="height: 30px">€{{info?.price | number:'2.'}}</h2>
                 <div [class.positiveText]="this.commonService.floatPercent < 0" [class.negativeText]="this.commonService.floatPercent > 0"  >
               </div>
                 <div class="btc d-flex float-end align-items-center">

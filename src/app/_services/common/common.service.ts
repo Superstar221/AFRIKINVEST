@@ -29,7 +29,7 @@ export class CommonService {
         [key: number]: number
     }
     const cryptoID : tplotOptions={Bitcoin:"bitcoin", "Ethereum":"ethereum", "Tether":"tether", "USD_Coin":"usd-coin", "BNB":"binancecoin"}
-    const url="https://api.coingecko.com/api/v3/coins/"+ cryptoID[this.currentCrypto] + "/market_chart?vs_currency=usd&days=90";
+    const url="https://api.coingecko.com/api/v3/coins/"+ cryptoID[this.currentCrypto] + "/market_chart?vs_currency=eur&days=90";
     return this.getCryptoData(url).toPromise();
   }
   async setCryptoData(){
