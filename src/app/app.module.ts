@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     NgApexchartsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
