@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FilterComponent } from './filter/filter.component';
 import { PaginationComponent } from './pagination/pagination.component';
 
+
 @NgModule({
     declarations: [FilterComponent, PaginationComponent],
     imports: [
-        CommonModule
+        CommonModule,
     ],
     exports: [FilterComponent, PaginationComponent]
 })

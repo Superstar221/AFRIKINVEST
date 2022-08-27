@@ -3,7 +3,9 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
+import { RealEstate } from 'src/app/_models/real-estate';
 
+const baseUrl = 'http://localhost:3000/api/v1/';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +17,11 @@ export class CommonService {
   floatPercent : number = 0;
   startPrice : number = 0;
   endPrice: number = 0;
+  realestateCount : number = 0;
   setCrypto(newCrypto: string) {
     this.currentCrypto = newCrypto;
   }
-  getCryptoData(url:any){
+  getUrlData(url:any){
     return this.http.get(url)
   }
   getCryptoDataSynchronous():Promise<any>{
@@ -27,7 +30,7 @@ export class CommonService {
     }
     const cryptoID : tplotOptions={Bitcoin:"bitcoin", "Ethereum":"ethereum", "Tether":"tether", "USD_Coin":"usd-coin", "BNB":"binancecoin"}
     const url="https://api.coingecko.com/api/v3/coins/"+ cryptoID[this.currentCrypto] + "/market_chart?vs_currency=eur&days=90";
-    return this.getCryptoData(url).toPromise();
+    return this.getUrlData(url).toPromise();
   }
   async setCryptoData(){
     let response = await this.getCryptoDataSynchronous()
@@ -37,6 +40,17 @@ export class CommonService {
     this.startPrice = this.pricePoints?.[0] 
     this.endPrice = this.pricePoints?.[this.pricePoints.length - 1]
     this.floatPercent = (this.startPrice) && this.endPrice ? (this.endPrice - this.startPrice) / this.startPrice : 0
+  }
+  getCountRealEstates():Promise<any>{
+    const url=baseUrl+"realestate/count";
+    return this.getUrlData(url).toPromise();
+  }
+  async setCountRealEstates(){
+    let response = await this.getCountRealEstates();
+    this.realestateCount = response.count;
+  }
+  getRealEstates(params:any){
+    return this.http.get<any>(baseUrl+"realestate", { params });
   }
   constructor(  private http: HttpClient) { }
 }

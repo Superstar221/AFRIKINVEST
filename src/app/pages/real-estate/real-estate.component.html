@@ -48,13 +48,38 @@
             </div>
         </div>
         <div class="row" *ngIf = "realestates.length" >
-            <div class="col-md-6 col-lg-4" *ngFor="let realestate of realestates">
+            <div class="col-md-6 col-lg-4" *ngFor="let realestate of realestates | paginate: {
+                itemsPerPage: pageSize,
+                currentPage: page,
+                totalItems: count
+              }">
                 
                 <app-cardtype2 [info]="realestate"></app-cardtype2>
             </div>
         </div>
+        <div class="row col-md-12">
+            <pagination-controls
+              previousLabel=""
+              nextLabel=""
+              [autoHide]="true"
+              [responsive]="true"
+              (pageChange)="handlePageChange($event)"
+            ></pagination-controls>
+          </div>
+        
+          <div class="page-nav">
+            <div class="item-count">
+                <p>{{count}} Listings for sale</p>
+            </div>
 
-        <app-pagination></app-pagination>
+            <button  class="page-prev" (click)="previousPage()">
+                
+            </button>
+            <button class="page-next" (click)="nextPage()">
+
+            </button>
+        </div> 
+        <!-- <app-pagination></app-pagination> -->
     </div>
 </section>
 

@@ -13,6 +13,7 @@ export class Cardtype2Component implements OnInit {
   constructor(public commonService : CommonService ) {}
 
   ngOnInit(): void {
+  //  console.log(this.info);
   }
 
 }

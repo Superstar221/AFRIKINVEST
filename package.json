@@ -29,6 +29,7 @@
     "jquery": "^3.6.0",
     "ng-apexcharts": "^1.7.1",
     "ngx-owl-carousel-o": "^7.0.1",
+    "ngx-pagination": "^6.0.2",
     "node-sass": "^7.0.1",
     "path": "^0.12.7",
     "popper.js": "^1.16.1",
@@ -54,5 +55,8 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.5.2"
   },
-  "engines": {"node": "18.8.0", "npm":"8.18.0"}
+  "engines": {
+    "node": "18.8.0",
+    "npm": "8.18.0"
+  }
 }
