@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,

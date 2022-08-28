@@ -1,4 +1,26 @@
-pagination-controls{
+pagination-template{
     border-bottom-style: outset;
     border-bottom-width: 1px;
+    margin-bottom: 20px;
 }
+
+.custom-pagination .paginator-nav-btns {
+    margin: 0px 10px;
+    font-weight: bold;
+  }
+  
+  .custom-pagination > div.current {
+    // background-color: #3dffaf;
+  }
+  .custom-pagination  button{
+    width: 35px; height: 35px; background-color: white;
+    border-radius: 50%;
+  }
+  .nonselect{
+    border: none;
+  }
+  .custom-pagination {
+    display: flex;
+    max-width: 232px;
+    margin: auto;
+  }

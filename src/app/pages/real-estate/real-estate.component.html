@@ -58,13 +58,23 @@
             </div>
         </div>
         <div class="row col-md-12">
-            <pagination-controls
-              previousLabel=""
-              nextLabel=""
-              [autoHide]="true"
-              [responsive]="true"
-              (pageChange)="handlePageChange($event)"
-            ></pagination-controls>
+            <pagination-template #p="paginationApi" (pageChange)="handlePageChange($event)">
+
+
+                <div class="custom-pagination">
+             
+                  <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                    <button [class.nonselect]="p.getCurrent() !== page.value" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                      {{ page.label }}
+                    </button>
+                    <div *ngIf="p.getCurrent() === page.value" style="border-bottom-style: solid;     padding-bottom: 20px;">
+                      <button >{{ page.label }}</button>
+                    </div>
+                  </div>
+                </div>
+              
+              </pagination-template>
+         
           </div>
         
           <div class="page-nav">
