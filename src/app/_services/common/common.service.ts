@@ -29,13 +29,14 @@ export class CommonService {
       [key: string]: string
     }
     const cryptoID : tplotOptions={Bitcoin:"bitcoin", "Ethereum":"ethereum", "Tether":"tether", "USD_Coin":"usd-coin", "BNB":"binancecoin"}
-    const url="https://api.coingecko.com/api/v3/coins/"+ cryptoID[this.currentCrypto] + "/market_chart?vs_currency=eur&days=90";
-    return this.getUrlData(url).toPromise();
+    let params : any = {}
+    params['crypto'] = cryptoID[this.currentCrypto];
+    return this.http.get<any>(baseUrl+"realestate/currency", { params }).toPromise();
   }
   async setCryptoData(){
     let response = await this.getCryptoDataSynchronous()
     this.pricePoints = [];
-    for(var i = 0 ; i < response.prices.length; i ++) this.pricePoints.push(response.prices[i][1]);
+    for(var i = 0 ; i < response.temp.prices.length; i ++) this.pricePoints.push(response.temp.prices[i][1]);
     this.currency = this.pricePoints[this.pricePoints.length - 1]
     this.startPrice = this.pricePoints?.[0] 
     this.endPrice = this.pricePoints?.[this.pricePoints.length - 1]
