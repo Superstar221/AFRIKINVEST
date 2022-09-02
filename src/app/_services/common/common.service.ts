@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { RealEstate } from 'src/app/_models/real-estate';
 
-const baseUrl = 'http://localhost:3000/api/v1/';
+const baseUrl = 'http://188.166.51.178:3000/api/v1/';
 @Injectable({
   providedIn: 'root'
 })

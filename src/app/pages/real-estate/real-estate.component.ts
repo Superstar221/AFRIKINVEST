@@ -98,10 +98,10 @@ export class RealEstateComponent implements OnInit {
               temp.img = p.Image1;
               temp.name = p.Name;
               temp.price = p.Price;
-              p.Bedrooms = p.Bedrooms == '' ? 0 : p.Bedrooms;
-              p.Bathrooms = p.Bathrooms == '' ? 0 : p.Bathrooms;
+              p.Bedrooms = p.Bedrooms == null ? 0 : p.Bedrooms;
+              p.Bathrooms = p.Bathrooms == null ? 0 : p.Bathrooms;
 
-              temp.details = [p.Bedrooms+"Bedrooms", p.Bathrooms+"Bathrooms", p.Total ];
+              temp.details = [p.Bedrooms+" Bedrooms", p.Bathrooms+" Bathrooms", p["Internal Area"]];
               this.realestates.push(temp);
           });
           this.count = this.commonService.realestateCount;
