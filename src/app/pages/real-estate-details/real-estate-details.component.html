@@ -21,12 +21,19 @@
         <div class="row overview">
             <div class="col-md-8">
                 <div class="img-preview">
-                    <img class="img-responsive" src="../../../assets/img/real-estate-details/img-preview-1.png">                            
+                    <!-- <img class="img-responsive" src="../../../assets/img/real-estate-details/img-preview-1.png"> -->
+                                         
+                    <img class="img-responsive img-equalheight" src="../../../assets/img/{{info?.imageArray?.[0]}}">      
                 </div>
                 <div class="row carousel-slider">
                     <div class="col-md-9">
                         <owl-carousel-o [options]="propertyImagesOptions" #owlCar>
-                            <ng-template carouselSlide>
+                            <ng-template carouselSlide *ngFor="let image of info?.imageArray">
+                                <div class="img-item">
+                                    <img style="height: 250px" class="img-responsive" src="../../../assets/img/{{image}}" alt={{image}}>                            
+                                </div>
+                            </ng-template>
+                            <!-- <ng-template carouselSlide>
                                 <div class="img-item">
                                     <img class="img-responsive" src="../../../assets/img/real-estate-details/carousel/img-1.png">                            
                                 </div>
@@ -50,7 +57,7 @@
                                 <div class="img-item">
                                     <img class="img-responsive" src="../../../assets/img/real-estate-details/carousel/img-2.png">                            
                                 </div>
-                            </ng-template>
+                            </ng-template> -->
                         </owl-carousel-o>
                     </div>
                     <div class="col-6 col-md-3 d-flex align-items-center justify-content-md-center">
@@ -66,21 +73,20 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <h1 class="text-center text-md-start">Luxury home In Cap Skiring</h1>
+                <h1 class="text-center text-md-start">{{info?.name}}</h1>
                 <div class="row price">
                     <div class="col-12">
                         <strong>Price</strong>
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p>$90,000</p>
+                                <p>€ {{info?.price | number:'2.'}}</p>
                             </div>
                             <div class="flex-shrink-0 text-end">
-                                <div class="chart d-flex float-start">
-                                    <img class="img-responsive" src="../../../assets/img/chart-2.png">
-                                </div>
+                                <div class="chart d-flex float-start" *ngIf="this.commonService.pricePoints">
+                                    <app-kline-chart-iteam-thumbnail style="width: -webkit-fill-available;" class="" [goodPrice] ="this.info?.price" [isPositive]="this.commonService.floatPercent < 0" [isNegative]="this.commonService.floatPercent > 0" [pricePoints]="this.commonService.pricePoints"></app-kline-chart-iteam-thumbnail>
+                                 </div>
                                 <div class="btc d-flex float-start align-items-center">
-                                    <i></i>
-                                    <h2>22</h2>
+                                    <img src="../assets/img/icons/{{this.commonService.currentCrypto}}.png">&nbsp;&nbsp;<h2>{{(info?.price! / this.commonService.currency) | number: '.2'}}</h2>
                                 </div>
                             </div>
                         </div>  
@@ -89,31 +95,32 @@
                 <div class="row parms">
                     <div class="col-3">
                         <strong>Bedroooms</strong>
-                        <p>6</p>
+                        <p>{{info?.bedrooms}}</p>
                     </div>
                     <div class="col-3">
                         <strong>Bathrooms</strong>
-                        <p>9</p>
+                        <p>{{info?.bathrooms}}</p>
                     </div>
                     <div class="col-3">
                         <strong>House m²</strong>
-                        <p>1400</p>
+                        <p>{{info?.internal}}</p>
                     </div>
                     <div class="col-3">
                         <strong>Place m²</strong>
-                        <p>2800</p>
+                        <p>{{info?.external}}</p>
                     </div>
                 </div>
                 <div class="row description">
                     <div class="col-12">
                         <strong>Description</strong>
-                        <p>Id auctor tortor metus, odio nullam. Id blandit volutpat eu eleifend aliquam tincidunt vitae sed.
+                        <p>{{info?.description}}</p>
+                        <!-- <p>Id auctor tortor metus, odio nullam. Id blandit volutpat eu eleifend aliquam tincidunt vitae sed.
                             Viverra gravida sit gravida leo vel massa faucibus praesent faucibus. Malesuada eget.</p>
                         <p>In sed augue eu fringilla viverra purus. Purus ut in leo dignissim dolor morbi. Mi leo ac purus
                             pharetra, quis purus proin. Mus sapien quis ipsum tincidunt aliquam, accumsan. Hendrerit est eu, eu
                             nunc, enim. Semper tincidunt vitae quis congue.
                             Commodo, risus blandit egestas est urna, fermentum. Aliquet velit id aliquet dolor imperdiet nam.
-                            Viverra integer id imperdiet aliquam et lectus porta enim sit.</p>
+                            Viverra integer id imperdiet aliquam et lectus porta enim sit.</p> -->
                     </div>
                 </div>
                 <div class="row parms">
@@ -157,7 +164,7 @@
                 <div class="controls d-flex align-items-center float-none float-md-end flex-column flex-md-row">
                     <a>Details</a>
                     <button class="btn btn-outline-primary">Smart Contract</button>
-                    <button class="btn btn-primary">Purchase property by crypto</button>
+                    <button class="btn btn-primary" (click)="purchase()">Purchase property by crypto</button>
                 </div>
             </div>
         </div>
@@ -184,125 +191,10 @@
         <div class="section-title">
             <h1>News & Trending</h1>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="project-img position-relative">
-                            <img class="img-responsive" src="../../../assets/img/news/img-1.png">
-                            <div class="controls d-flex align-items-center position-absolute start-0 end-0 bottom-0 ">
-                                <a href="#" class="favorite ms-auto"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <h3>House in Senegal</h3>
-                                <div class="chart d-flex">
-                                    <img class="img-responsive" src="../../../assets/img/chart.png">
-                                </div>
-                            </div>
-                            <div class="flex-shrink-0 text-end">
-                                <h2>$90,000</h2>
-                                <div class="btc d-flex float-end align-items-center">
-                                    <i></i>
-                                    <h2>789</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="project-img position-relative">
-                            <span class="badge">NEW</span>
-                            <img class="img-responsive" src="../../../assets/img/news/img-2.png">
-                            <div class="controls d-flex align-items-center position-absolute start-0 end-0 bottom-0">
-                                <a href="#" class="video"></a>
-                                <a href="#" class="favorite ms-auto"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <h3>Apartment in Senegal</h3>
-                                <div class="chart d-flex">
-                                    <img class="img-responsive" src="../../../assets/img/chart.png">
-                                </div>
-                            </div>
-                            <div class="flex-shrink-0 text-end">
-                                <h2>$80,678</h2>
-                                <div class="btc d-flex float-end align-items-center">
-                                    <i></i>
-                                    <h2>32</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="project-img position-relative">
-                            <img class="img-responsive" src="../../../assets/img/news/img-3.png">
-                            <div class="controls d-flex align-items-center position-absolute start-0 end-0 bottom-0">
-                                <a href="#" class="favorite ms-auto"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <h3>Penthouse in Senegal</h3>
-                                <div class="chart d-flex">
-                                    <img class="img-responsive" src="../../../assets/img/chart.png">
-                                </div>
-                            </div>
-                            <div class="flex-shrink-0 text-end">
-                                <h2>$40,999</h2>
-                                <div class="btc d-flex float-end align-items-center">
-                                    <i></i>
-                                    <h2>12</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="project-img position-relative">
-                            <img class="img-responsive" src="../../../assets/img/news/img-4.png">
-                            <div class="controls d-flex align-items-center position-absolute start-0 end-0 bottom-0">
-                                <a href="#" class="video"></a>
-                                <a href="#" class="favorite ms-auto"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <h3>Villa in Senegal</h3>
-                                <div class="chart d-flex">
-                                    <img class="img-responsive" src="../../../assets/img/chart.png">
-                                </div>
-                            </div>
-                            <div class="flex-shrink-0 text-end">
-                                <h2>$190,000</h2>
-                                <div class="btc d-flex float-end align-items-center">
-                                    <i></i>
-                                    <h2>129</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row" *ngIf = "realestates.length" >
+            <div class="col-md-6 col-lg-3" *ngFor="let realestate of realestates">
+                
+                <app-cardtype1 [info]="realestate"></app-cardtype1>
             </div>
         </div>
 

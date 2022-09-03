@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { RealEstate } from 'src/app/_models/real-estate';
 
-const baseUrl = 'https://188.166.51.178:3000/api/v1/';
+const baseUrl = 'https://188.155.51.178:3000/api/v1/';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,6 +52,9 @@ export class CommonService {
   }
   getRealEstates(params:any){
     return this.http.get<any>(baseUrl+"realestate", { params });
+  }
+  getRealEstateDetail(id:string){
+    return this.http.get<any>(baseUrl+"realestate/"+id);
   }
   constructor(  private http: HttpClient) { }
 }

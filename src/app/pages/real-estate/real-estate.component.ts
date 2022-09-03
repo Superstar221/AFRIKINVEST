@@ -16,18 +16,6 @@ export class RealEstateComponent implements OnInit {
   realestates : RealEstate[] = [];
   currentRealEstate : RealEstate = {};
   currentIndex = -1;
-  // realestates : RealEstate[] =[{img:"real-estate/img-1.png", name:"Country house in Saly", price:90000, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-2.png", name:"Luxury home In Cap Skiring", price:190000, isVideo:true, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-3.png", name:"Residential complexes in Dakar Almadie", price:50900, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-4.png", name:"Penthouse in central Dakar", price:790000, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-5.png", name:"Designer villas in Somone", price:1190000, isVideo:true, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-6.png", name:"House with exceptional views in Saly", price:679000, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-7.png", name:"Elegant style view in Casamance", price:89000, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-8.png", name:"Exclusive home in Dakar", price:90000, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-9.png", name:"Townhouse in Senegal", price:140000, isVideo:true, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-10.png", name:"Properties in Dakar", price:990000, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-11.png", name:"Luxury villas in Saly", price:50000, isVideo:true, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
-  // {img:"real-estate/img-12.png", name:"Penthouse in Senegal", price:80000, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]}];
   getRequestParams(page: number, pageSize: number): any {
     let params: any = {};
 
@@ -100,7 +88,7 @@ export class RealEstateComponent implements OnInit {
               temp.price = p.Price;
               p.Bedrooms = p.Bedrooms == null ? 0 : p.Bedrooms;
               p.Bathrooms = p.Bathrooms == null ? 0 : p.Bathrooms;
-
+              temp.id = p._id;
               temp.details = [p.Bedrooms+" Bedrooms", p.Bathrooms+" Bathrooms", p["Internal Area"]];
               this.realestates.push(temp);
           });

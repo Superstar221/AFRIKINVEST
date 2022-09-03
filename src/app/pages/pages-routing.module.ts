@@ -22,7 +22,7 @@ const routes: Routes = [
       component: RealEstateComponent
     },
     {
-      path: 'real-estate-details',
+      path: 'real-estate-details/:id',
       component: RealEstateDetailsComponent
     },
     {

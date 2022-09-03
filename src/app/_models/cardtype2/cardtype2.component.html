@@ -3,7 +3,7 @@
         <div class="project-img position-relative">
             
             <span *ngIf="info.isNew" class="badge">NEW</span>
-            <a class="d-block" routerLink="/real-estate-details">
+            <a class="d-block" routerLink="/real-estate-details/{{info?.id}}">
                 <img class="img-responsive img-equalheight" src="../../../assets/img/{{info?.img}}">
             </a>
             <div class="controls d-flex align-items-center position-absolute start-0 end-0 bottom-0 ">
