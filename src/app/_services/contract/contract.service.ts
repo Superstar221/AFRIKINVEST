@@ -4,7 +4,39 @@ import Web3 from "web3";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { Subject, } from 'rxjs';
-import { uDonate_address, uDonate_abi } from '../../abis.js'
+
+const uDonate_address = '0xA11e73F851C12d8d25a7b88a6121AD365De1838c';
+const uDonate_abi = [{
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_registry",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_causeRegistry",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "CreateOrganization",
+    "type": "event"
+  },
+  ...
+ ]
 
 @Injectable({
   providedIn: 'root'

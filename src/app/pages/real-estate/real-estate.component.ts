@@ -4,6 +4,7 @@ import { toJson } from 'angular';
 import { SlidesOutputData, OwlOptions } from 'ngx-owl-carousel-o';
 import { RealEstate } from 'src/app/_models/real-estate';
 import { CommonService } from 'src/app/_services/common/common.service';
+// import { ContractService } from 'src/app/_services/contract/contract.service';
 @Component({
   selector: 'app-real-estate',
   templateUrl: './real-estate.component.html',

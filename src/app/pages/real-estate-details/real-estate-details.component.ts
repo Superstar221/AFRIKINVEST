@@ -3,7 +3,9 @@ import { SlidesOutputData, OwlOptions } from 'ngx-owl-carousel-o';
 import { RealEstate } from 'src/app/_models/real-estate';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/_services/common/common.service';
+import {DomSanitizer } from '@angular/platform-browser';
 import { KLineChartIteamThumbnailComponent } from 'src/app/kline-chart-iteam-thumbnail/kline-chart-iteam-thumbnail.component';
+
 @Component({
   selector: 'app-real-estate-details',
   templateUrl: './real-estate-details.component.html',
@@ -15,6 +17,7 @@ export class RealEstateDetailsComponent implements OnInit {
   {img:"news/img-3.png", name:"Penthouse in Senegal", price:40999, isVideo:false, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]},
   {img:"news/img-4.png", name:"Villa in Senegal", price:190000, isVideo:true, isNew:false, details: ["3 Bedrooms", "2 Bathrooms","200 m²"]}];
 
+  location: string = "";
   info: RealEstate = {};
   propertyImagesOptions: OwlOptions = {
     loop: true,
@@ -56,7 +59,7 @@ export class RealEstateDetailsComponent implements OnInit {
     }    
   }
 
-  constructor(    private route: ActivatedRoute, public commonService : CommonService) { }
+  constructor(    private route: ActivatedRoute, public commonService : CommonService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getRealEstateDetail();
@@ -80,6 +83,8 @@ export class RealEstateDetailsComponent implements OnInit {
         this.info.lng = realEstateDetail['Lng'];
         this.info.city = realEstateDetail['City'];
         this.info.country = realEstateDetail['Country'];
+        this.location = "https://maps.google.com/maps?q="+this.info?.lat+","+this.info?.lng+"&hl=es;z=14&amp;&output=embed";
+        console.log(this.location);
         this.info.imageArray = [];
         for(let i = 1; i <= realEstateDetail['Image Count']; i ++){
           let index : string = "Image "+ i +" File Name";
@@ -88,7 +93,9 @@ export class RealEstateDetailsComponent implements OnInit {
       }
     );
   }
-
+  mapUrl(){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.location);
+  }
   purchase() {
 
   }
